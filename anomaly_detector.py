@@ -1,4 +1,6 @@
 import os
+import configparser
+import importlib
 import re
 import numpy as np
 
@@ -6,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 
 import gensim.models
+
 
 class Corpus(object):
     """
@@ -16,6 +19,7 @@ class Corpus(object):
         """
         Initialize empty document list.
         """
+
         self.norm_files_path = norm_files_path
         self.fail_files_path = fail_files_path
         self.norm_files = []
@@ -55,7 +59,7 @@ class Corpus(object):
 
         sentences = [line for f in (
             self.norm_files + self.fail_files) for line in f]
-        
+
         self.model = gensim.models.Word2Vec(sentences=sentences, min_count=1)
 
         return
@@ -77,29 +81,53 @@ class Corpus(object):
 
         return
 
-    def assess_classifier(self):
+    def assess_classifier(self, classifier):
 
         X_train, X_test, y_train, y_test = train_test_split(
-            np.array(self.files_pos), self.files_labels, test_size=0.2, random_state=0)
+            np.array(self.files_pos), self.files_labels, test_size=0.2, random_state=1)
 
-        gnb = GaussianNB()
-        y_pred = gnb.fit(X_train, y_train).predict(X_test)
+        # gnb = GaussianNB()
+        module_name, class_name = classifier.rsplit(".", 1)
+        Classifier = getattr(importlib.import_module(
+            module_name), class_name)
 
-        print("Number of mislabeled points out of a total %d points : %d" %
-              (X_test.shape[0], (y_test != y_pred).sum()))
+        cl = Classifier()
+
+        y_pred = cl.fit(X_train, y_train).predict(X_test)
+
+        print("Classifier %s: number of mislabeled points out of a total %d points : %d" %
+              (class_name, X_test.shape[0], (y_test != y_pred).sum()))
+
+        return
+
+    def compare_classifiers(self, classifiers):
+
+        for classifier in classifiers:
+            self.assess_classifier(classifier)
 
         return
 
 
 def main():
-    norm_files_path = '../data/norm'
-    fail_files_path = '../data/fail'
+    CONFIG_FILE = './config.ini'
+    LOCATIONS = 'locations'
+    NORM_FILES_PATH = 'norm_files_path'
+    FAIL_FILES_PATH = 'fail_files_path'
+    CLASSIFICATION = 'classification'
+    CLASSIFIERS = 'classifiers'
+
+    config = configparser.ConfigParser()
+    config.read(CONFIG_FILE)
+
+    norm_files_path = config[LOCATIONS][NORM_FILES_PATH]
+    fail_files_path = config[LOCATIONS][FAIL_FILES_PATH]
+    classifiers = config[CLASSIFICATION][CLASSIFIERS]
 
     corpus = Corpus(norm_files_path, fail_files_path)
 
     corpus.train_word2vec()
     corpus.build_training_set()
-    corpus.assess_classifier()
+    corpus.compare_classifiers(classifiers.split(","))
 
 
 if __name__ == '__main__':
