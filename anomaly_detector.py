@@ -4,8 +4,12 @@ import importlib
 import re
 import numpy as np
 
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
 
 import gensim.models
 
@@ -15,13 +19,16 @@ class Corpus(object):
     A collection of norm and fail docs - thus prelabeled.
     """
 
-    def __init__(self, norm_files_path, fail_files_path):
+    def __init__(self, norm_files_path, fail_files_path,
+                 remove_prefix_delim, remove_prefix_delim_occur):
         """
         Initialize empty document list.
         """
 
         self.norm_files_path = norm_files_path
         self.fail_files_path = fail_files_path
+        self.remove_prefix_delim = remove_prefix_delim
+        self.remove_prefix_delim_occur = remove_prefix_delim_occur
         self.norm_files = []
         self.fail_files = []
         self.vocabulary = set()
@@ -41,7 +48,13 @@ class Corpus(object):
             with open(entry) as fp:
                 line = fp.readline()
                 while line:
-                    s = re.sub(r'[^a-zA-Z0-9]', ' ', line).split()
+                    parts = line.split(
+                        self.remove_prefix_delim, self.remove_prefix_delim_occur + 1)
+                    i = len(line) - len(parts[-1]) - \
+                        len(self.remove_prefix_delim)
+
+                    s = re.sub(r'[^a-zA-Z0-9]', ' ', line[i +
+                                                          len(self.remove_prefix_delim):]).split()
                     for i in s:
                         self.vocabulary.add(i)
 
@@ -83,10 +96,12 @@ class Corpus(object):
 
     def assess_classifier(self, classifier):
 
-        X_train, X_test, y_train, y_test = train_test_split(
-            np.array(self.files_pos), self.files_labels, test_size=0.2, random_state=1)
+        X = np.array(self.files_pos)
+        Y = self.files_labels
 
-        # gnb = GaussianNB()
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, Y, test_size=0.2, random_state=1)
+
         module_name, class_name = classifier.rsplit(".", 1)
         Classifier = getattr(importlib.import_module(
             module_name), class_name)
@@ -110,9 +125,15 @@ class Corpus(object):
 
 def main():
     CONFIG_FILE = './config.ini'
+
     LOCATIONS = 'locations'
     NORM_FILES_PATH = 'norm_files_path'
     FAIL_FILES_PATH = 'fail_files_path'
+
+    PARSING = 'parsing'
+    REMOVE_PREFIX_DELIM = 'remove_prefix_delim'
+    REMOVE_PREFIX_DELIM_OCCUR = 'remove_prefix_delim_occur'
+
     CLASSIFICATION = 'classification'
     CLASSIFIERS = 'classifiers'
 
@@ -122,8 +143,11 @@ def main():
     norm_files_path = config[LOCATIONS][NORM_FILES_PATH]
     fail_files_path = config[LOCATIONS][FAIL_FILES_PATH]
     classifiers = config[CLASSIFICATION][CLASSIFIERS]
+    remove_prefix_delim = config[PARSING][REMOVE_PREFIX_DELIM]
+    remove_prefix_delim_occur = int(config[PARSING][REMOVE_PREFIX_DELIM_OCCUR])
 
-    corpus = Corpus(norm_files_path, fail_files_path)
+    corpus = Corpus(norm_files_path, fail_files_path,
+                    remove_prefix_delim, remove_prefix_delim_occur)
 
     corpus.train_word2vec()
     corpus.build_training_set()
