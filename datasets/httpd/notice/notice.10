@@ -1,0 +1,64 @@
+[Sun Jul 10 04:04:42 2005] [notice] Digest: generating secret for digest authentication ...
+[Sun Jul 10 04:04:42 2005] [notice] Digest: done
+[Sun Jul 10 04:04:42 2005] [notice] LDAP: Built with OpenLDAP LDAP SDK
+[Sun Jul 10 04:04:42 2005] [notice] LDAP: SSL support unavailable
+[Sun Jul 10 04:04:44 2005] [notice] mod_python: Creating 32 session mutexes based on 150 max processes and 0 max threads.
+[Sun Jul 10 04:04:45 2005] [notice] mod_security/1.9dev2 configured
+[Sun Jul 10 04:04:45 2005] [notice] Apache/2.0.49 (Fedora) configured -- resuming normal operations
+[Sun Jul 10 04:04:45 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Sun Jul 10 04:04:45 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Sun Jul 10 04:04:45 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Sun Jul 10 04:04:45 2005] [notice] jk2_init() Found child 25119 in scoreboard slot 17
+[Sun Jul 10 04:04:45 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Sun Jul 10 04:04:45 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Sun Jul 10 04:04:45 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Sun Jul 10 04:04:45 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Sun Jul 10 04:04:45 2005] [notice] jk2_init() Found child 25120 in scoreboard slot 19
+[Sun Jul 10 04:04:45 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Mon Jul 11 17:35:29 2005] [notice] jk2_init() Found child 1301 in scoreboard slot 0
+[Mon Jul 11 17:35:29 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Mon Jul 11 17:35:38 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:01 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:02 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:03 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:04 2005] [notice] jk2_init() Found child 13855 in scoreboard slot 6
+[Fri Jul 15 06:16:04 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:05 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:06 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:07 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:08 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:09 2005] [notice] jk2_init() Found child 13860 in scoreboard slot 12
+[Fri Jul 15 06:16:09 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:10 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:10 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:11 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:11 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:11 2005] [notice] jk2_init() Found child 13865 in scoreboard slot 20
+[Fri Jul 15 06:16:11 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:11 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties
+[Fri Jul 15 06:16:17 2005] [notice] mod_jk2 Shutting down
+[Fri Jul 15 06:16:18 2005] [notice] mod_jk2 Shutting down
+[Fri Jul 15 06:16:19 2005] [notice] mod_jk2 Shutting down
+[Fri Jul 15 06:16:20 2005] [notice] mod_jk2 Shutting down
+[Fri Jul 15 06:16:21 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] Graceful restart requested, doing restart
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down
+[Sun Jul 17 04:08:16 2005] [notice] mod_jk2 Shutting down

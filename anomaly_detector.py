@@ -116,13 +116,6 @@ class Corpus(object):
         y_pred = cl.fit(X_train, y_train).predict(X_test)
         end = time.time()
 
-
-
-
-
-        print("Classifier %s: number of mislabeled points out of a total %d points : %d" %
-              (class_name, X_test.shape[0], (y_test != y_pred).sum()))
-
         self.cls_name.append(class_name)
         self.cls_accuracy.append(accuracy_score(y_test, y_pred))
         self.cls_runtime.append(end - start)
@@ -141,6 +134,12 @@ class Corpus(object):
 
         for i, txt in enumerate(self.cls_name):
             plt.annotate(txt, (x[i], y[i]))
+
+        plt.title('Classifiers performance by accuracy/ evaluation time')
+        plt.xlabel('Accuracy')
+        plt.ylabel('Runtime')
+        plt.xlim(0, 1.1)
+        plt.ylim(0, max(y)*1.05)
 
         plt.show()
 
