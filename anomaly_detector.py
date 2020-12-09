@@ -1,4 +1,5 @@
 import os
+import time
 import configparser
 import importlib
 import re
@@ -7,9 +8,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
-from sklearn.decomposition import PCA
-from sklearn.manifold import TSNE
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 import gensim.models
 
@@ -35,6 +35,10 @@ class Corpus(object):
         self.model = {}
         self.files_pos = []
         self.files_labels = []
+
+        self.cls_name = []
+        self.cls_runtime = []
+        self.cls_accuracy = []
 
     def process_files(self, files_path):
         is_norm = (self.norm_files_path == files_path)
@@ -108,10 +112,20 @@ class Corpus(object):
 
         cl = Classifier()
 
+        start = time.time()
         y_pred = cl.fit(X_train, y_train).predict(X_test)
+        end = time.time()
+
+
+
+
 
         print("Classifier %s: number of mislabeled points out of a total %d points : %d" %
               (class_name, X_test.shape[0], (y_test != y_pred).sum()))
+
+        self.cls_name.append(class_name)
+        self.cls_accuracy.append(accuracy_score(y_test, y_pred))
+        self.cls_runtime.append(end - start)
 
         return
 
@@ -119,6 +133,16 @@ class Corpus(object):
 
         for classifier in classifiers:
             self.assess_classifier(classifier)
+
+        x = np.array(self.cls_accuracy)
+        y = np.array(self.cls_runtime)
+
+        plt.scatter(x, y, alpha=0.5)
+
+        for i, txt in enumerate(self.cls_name):
+            plt.annotate(txt, (x[i], y[i]))
+
+        plt.show()
 
         return
 
