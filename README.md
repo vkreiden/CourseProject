@@ -79,13 +79,15 @@ We prepared and tested two running configurations below.
 
 - Build docker container:
 ```
-docker build -t *ad_app* .
+docker build -t ad_app .
 mkdir figures
 ```
 
 - Run:
 ```
-docker run -d --mount type=bind,src="$(pwd)"/config,target=/config --mount type=bind,src="$(pwd)"/datasets,target=/datasets --mount type=bind,src="$(pwd)"/figures,target=/figures *ad_app*
+docker run -d --mount type=bind,src="$(pwd)"/config,target=/config \
+              --mount type=bind,src="$(pwd)"/datasets,target=/datasets \
+              --mount type=bind,src="$(pwd)"/figures,target=/figures ad_app
 ```
 
 ### Using conda package manager
