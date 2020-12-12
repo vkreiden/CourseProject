@@ -49,9 +49,9 @@ preprocessing steps which are performed on the input data using standard string 
 2 remove non-alphanumerical characters
 
 ### NLP
-To prepare the data for ML algorithms we start with applying the [*wor2vec*](https://en.wikipedia.org/wiki/Word2vec) word embedding to vectorize the words.
-We train the *wor2vec* model on the vocabulary generated from all the words appearing in the log messages.
-We use [*gensim*](https://radimrehurek.com/gensim/) library to build the wor2vec model over default number of dimensions (100) of the vector space.
+To prepare the data for ML algorithms we start with applying the [*word2vec*](https://en.wikipedia.org/wiki/Word2vec) word embedding to vectorize the words.
+We train the *word2vec* model on the vocabulary generated from all the words appearing in the log messages.
+We use [*gensim*](https://radimrehurek.com/gensim/) library to build the *word2vec* model over default number of dimensions (100) of the vector space.
 To calculate the positions of the files in the vector space we use a centroid approach twice: we first
 calculate an average postion vector per log message over all the mesage words vectors. Then we find
 a position of each file in the vector space by calculating the average of all the file's log messages vectors.
