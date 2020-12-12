@@ -1,4 +1,7 @@
 import os
+import os.path
+from os import path
+from datetime import datetime
 import time
 import configparser
 import importlib
@@ -98,13 +101,13 @@ class Corpus(object):
 
         return
 
-    def assess_classifier(self, classifier):
+    def assess_classifier(self, classifier, kfold_test_size):
 
         X = np.array(self.files_pos)
         Y = self.files_labels
 
         X_train, X_test, y_train, y_test = train_test_split(
-            X, Y, test_size=0.2, random_state=1)
+            X, Y, test_size=kfold_test_size)
 
         module_name, class_name = classifier.rsplit(".", 1)
         Classifier = getattr(importlib.import_module(
@@ -122,10 +125,10 @@ class Corpus(object):
 
         return
 
-    def compare_classifiers(self, classifiers):
+    def compare_classifiers(self, classifiers, kfold_test_size, file_ext):
 
         for classifier in classifiers:
-            self.assess_classifier(classifier)
+            self.assess_classifier(classifier, kfold_test_size)
 
         x = np.array(self.cls_accuracy)
         y = np.array(self.cls_runtime)
@@ -141,13 +144,20 @@ class Corpus(object):
         plt.xlim(0, 1.1)
         plt.ylim(0, max(y)*1.05)
 
-        plt.show()
+        in_container = path.exists("/.dockerenv")
+        if in_container:
+            file_name = "figures/fig_" + \
+                str(datetime.timestamp(datetime.now())) + "." + file_ext
+
+            plt.savefig(file_name)
+        else:
+            plt.show()
 
         return
 
 
 def main():
-    CONFIG_FILE = './config.ini'
+    CONFIG_FILE = 'config/config.ini'
 
     LOCATIONS = 'locations'
     NORM_FILES_PATH = 'norm_files_path'
@@ -159,22 +169,33 @@ def main():
 
     CLASSIFICATION = 'classification'
     CLASSIFIERS = 'classifiers'
+    CLASSIFIERS = 'classifiers'
+    KFOLD_TEST_SIZE = 'kfold_test_size'
+
+    OUTPUT = 'output'
+    EXT = 'ext'
 
     config = configparser.ConfigParser()
     config.read(CONFIG_FILE)
 
     norm_files_path = config[LOCATIONS][NORM_FILES_PATH]
     fail_files_path = config[LOCATIONS][FAIL_FILES_PATH]
-    classifiers = config[CLASSIFICATION][CLASSIFIERS]
+
     remove_prefix_delim = config[PARSING][REMOVE_PREFIX_DELIM]
     remove_prefix_delim_occur = int(config[PARSING][REMOVE_PREFIX_DELIM_OCCUR])
+
+    classifiers = config[CLASSIFICATION][CLASSIFIERS]
+    kfold_test_size = float(config[CLASSIFICATION][KFOLD_TEST_SIZE])
+
+    file_ext = config[OUTPUT][EXT]
 
     corpus = Corpus(norm_files_path, fail_files_path,
                     remove_prefix_delim, remove_prefix_delim_occur)
 
     corpus.train_word2vec()
     corpus.build_training_set()
-    corpus.compare_classifiers(classifiers.split(","))
+    corpus.compare_classifiers(
+        classifiers.split(","), kfold_test_size, file_ext)
 
 
 if __name__ == '__main__':
