@@ -8,7 +8,7 @@ The developed tool is based on the [technology review](https://github.com/vkreid
 * [Functionality](#Functionality)
 * [Implementation details](#implementation-details)
 * [Usage](#usage)
-* [Presentation link](#presentation-link)
+* [Usage presentation](#usage-presentation)
 
 ## Functionality
 This tool provides a functionality of assessing performance as well as 
@@ -70,6 +70,11 @@ OS the chart will be displayed onto the display. This may not be easily achieved
 the tool is run in the container. In this case the tool will save the chart into 
 figures folder in the format specified by user in the config.
 
+### Testing datasets
+We provide two sample datasets ["perfect split"](datasets/perfect_split) and ["mix"](datasets/mix).
+These datasets are mostly synthetic. They were generated from the real httpd error log files in the
+following way: the *notice* level messages are separated into the *"notice"* files while *error* level messages are separated into the *"error"* files. ["Perfect split"](datasets/perfect_split) dataset includes strictly separated *notice* and *error* files while the ["mix"](datasets/mix) contains a ~70%-30% mixes of two kinds. This allows to see the implemented approach works from the perspective of expected accuracy: with the *perfect split* all the classifiers are 100% accurate while when we use a mixed adataset the accuracy drops to 70-80%.
+
 ## Usage
 We prepared and tested two running configurations below.
 
@@ -105,5 +110,5 @@ conda update -y smart_open
 python anomaly_detector.py
 ```
 
-## Presentation link
-TBD
+### Usage presentation
+**[recording](https://mediaspace.illinois.edu/media/t/1_qvmekhhz)**
