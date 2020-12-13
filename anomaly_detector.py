@@ -63,8 +63,25 @@ class Corpus(object):
 
     Methods
     -------
-    says(sound=None)
-        Prints the animals name and what sound it makes
+    _process_files(self, files_path):
+        Reads and processes files in the files_path location:
+        dropping prefix if needed, removing non-alphanumeric,
+        updates vocabulary as well as either norm_files or fail_files
+
+    train_word2vec(self):
+        Processes both norm and fail files and builds 
+        the word2vec model on the lexicon
+    
+    build_training_set(self):
+        Prepares files_pos and files_labels for estimators.
+
+    _assess_classifier(self, classifier, kfold_test_size):
+        Trains and tests a classifier with K-fold validation
+        and stores the accuracy score and the runtime metric.
+
+    compare_classifiers(self, classifiers, kfold_test_size, folder, file_ext):
+        Assesses each of the classifiers in the list and then plots
+        the results on the scatter chart (classifier->{accuracy,runtime})
     """
 
     def __init__(self, norm_files_path, fail_files_path,
