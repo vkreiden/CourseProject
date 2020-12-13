@@ -22,7 +22,7 @@ Each file represents one data item (document) in one of the two lists thus the d
 items are prelabeled with either "fail" or "normal" labels.
 After the data is read and preprocessed, an NLP method is applied to transform each data item
 (log file) into a vector space. The received matrix along with labels is fed into each of
-of the supervised machine learning to evaluate the performance. The output of the tool run is
+of the supervised machine learning models to evaluate the performance. The output of the tool run is
 a scatter chart displaying each tested classifier over 2 dimensions - classification accuracy 
 vs. runtime.
 The tool is implemented in python (see [Implementation details](#implementation-details))
@@ -73,7 +73,7 @@ figures folder in the format specified by user in the config.
 ### Testing datasets
 We provide two sample datasets ["perfect split"](datasets/perfect_split) and ["mix"](datasets/mix).
 These datasets are mostly synthetic. They were generated from the real httpd error log files in the
-following way: the *notice* level messages are separated into the *"notice"* files while *error* level messages are separated into the *"error"* files. ["Perfect split"](datasets/perfect_split) dataset includes strictly separated *notice* and *error* files while the ["mix"](datasets/mix) contains a ~70%-30% mixes of two kinds. This allows to see the implemented approach works from the perspective of expected accuracy: with the *perfect split* all the classifiers are 100% accurate while when we use a mixed adataset the accuracy drops to 70-80%.
+following way: the *notice* level messages are separated into the *"notice"* files while *error* level messages are separated into the *"error"* files. ["Perfect split"](datasets/perfect_split) dataset includes strictly separated *notice* and *error* files while the ["mix"](datasets/mix) contains a ~70%-30% mixes of two kinds. This allows to see the implemented approach works from the perspective of expected accuracy: with the *perfect split* all the classifiers are 100% accurate while when we use a mixed adataset the accuracy drops below 100%.
 
 ## Usage
 We prepared and tested two running configurations below.
