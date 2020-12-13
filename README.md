@@ -73,7 +73,15 @@ figures folder in the format specified by user in the config.
 ### Testing datasets
 We provide two sample datasets ["perfect split"](datasets/perfect_split) and ["mix"](datasets/mix).
 These datasets are mostly synthetic. They were generated from the real httpd error log files in the
-following way: the *notice* level messages are separated into the *"notice"* files while *error* level messages are separated into the *"error"* files. ["Perfect split"](datasets/perfect_split) dataset includes strictly separated *notice* and *error* files while the ["mix"](datasets/mix) contains a ~70%-30% mixes of two kinds. This allows to see the implemented approach works from the perspective of expected accuracy: with the *perfect split* all the classifiers are [100% accurate](figures/perfect_split.png) while when we use a mixed adataset the accuracy drops [below 100%](figures/mix.png).
+following way: the *notice* level messages are separated into the *"notice"* files while *error* level messages are separated into the *"error"* files. ["Perfect split"](datasets/perfect_split) dataset includes strictly separated *notice* and *error* files while the ["mix"](datasets/mix) contains a ~70%-30% mixes of two kinds. This allows to see the implemented approach works from the perspective of expected accuracy: with the *perfect split* all the classifiers are [100% accurate](figures/perfect_split.png) while when we use a mixed dataset the accuracy drops [below 100%](figures/mix.png).
+
+*Perfect split dataset*
+
+![alt text](figures/perfect_split.png)  
+
+*Mix dataset*
+
+![alt text](figures/mix.png?raw=true)
 
 ## Usage
 We prepared and tested two running configurations below.
