@@ -86,7 +86,7 @@ following way: the *notice* level messages are separated into the *"notice"* fil
 ## Usage
 We prepared and tested two running configurations below.
 
-- Clone this project.
+- Clone this project and cd into it.
 
 ### Docker (recommended)
 
@@ -103,6 +103,19 @@ docker run -d --mount type=bind,src="$(pwd)"/config,target=/config \
 ```
 
 - *__(On Windows)__ substitute "$(pwd)" in the above command with the current directory path*
+
+### Using pip package manager in virtual environment
+```
+python -m ensurepip --default-pip
+python -m venv test_ad_app
+```
+
+- (On Linux/ Mac): ```source test_ad_app/bin/activate```
+- (On Windows): ```test_ad_app\Scripts\activate```
+
+```
+pip install -r requirements.txt
+```
 
 ### Using conda package manager
 
