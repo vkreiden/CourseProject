@@ -133,4 +133,4 @@ python anomaly_detector.py
 ```
 
 ### Usage presentation
-**[recording](https://mediaspace.illinois.edu/media/t/1_qvmekhhz)**
+**[recording](https://mediaspace.illinois.edu/media/t/1_964l9lni)**
